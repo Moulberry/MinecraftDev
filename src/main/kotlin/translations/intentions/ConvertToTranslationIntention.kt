@@ -77,7 +77,7 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
             val key = result.first ?: return
             val replaceLiteral = result.second
             try {
-                if (existingKey == null || existingKey != key) {
+                if (existingKey != key) {
                     TranslationFiles.add(element, key, value)
                 }
                 if (replaceLiteral) {
