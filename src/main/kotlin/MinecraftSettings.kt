@@ -39,7 +39,7 @@ class MinecraftSettings : PersistentStateComponent<MinecraftSettings.State> {
         var isShadowAnnotationsSameLine: Boolean = true,
 
         var isForceJsonTranslationFile: Boolean = false,
-        var convertToTranslationTemplate: String = "net.minecraft.client.resources.I18n.format(\"\$key\")"
+        var convertToTranslationTemplate: String = "net.minecraft.client.resources.I18n.format(\"\$key\")",
     )
 
     private var state = State()
