@@ -261,11 +261,7 @@ object TranslationFiles {
     private fun PsiFile.findKeyForTextAsJson(text: String): String? {
         val rootObject = this.firstChild as? JsonObject ?: return null
         return rootObject.propertyList.firstOrNull {
-            if (it.value is JsonStringLiteral) {
-                (it.value as JsonStringLiteral).value == text
-            } else {
-                false
-            }
+            (it.value as? JsonStringLiteral)?.value == text
         }?.name
     }
 
