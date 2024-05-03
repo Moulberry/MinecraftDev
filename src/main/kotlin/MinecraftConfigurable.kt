@@ -29,7 +29,12 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.EnumComboBoxModel
 import com.intellij.ui.components.Label
-import com.intellij.ui.dsl.builder.*
+import com.intellij.ui.dsl.builder.AlignX
+import com.intellij.ui.dsl.builder.BottomGap
+import com.intellij.ui.dsl.builder.bindItem
+import com.intellij.ui.dsl.builder.bindSelected
+import com.intellij.ui.dsl.builder.bindText
+import com.intellij.ui.dsl.builder.panel
 import com.intellij.util.IconUtil
 import javax.swing.JComponent
 import org.jetbrains.annotations.Nls
@@ -95,7 +100,6 @@ class MinecraftConfigurable : Configurable {
             row(MCDevBundle("minecraft.settings.translation.convert_to_translation_template")) {
                 textField().bindText(settings::convertToTranslationTemplate)
             }
-
         }
 
         onApply {
