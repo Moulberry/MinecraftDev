@@ -132,12 +132,10 @@ object TranslationFiles {
 
         for (file in files) {
             val psiFile = PsiManager.getInstance(context.project).findFile(file) ?: continue
-            psiFile.apply {
-                if (jsonVersion) {
-                    this.findKeyForTextAsJson(text)?.let { return it }
-                } else {
-                    // todo: this.findKeyForTextAsLang(text)
-                }
+            if (jsonVersion) {
+                psiFile.findKeyForTextAsJson(text)?.let { return it }
+            } else {
+                // todo: this.findKeyForTextAsLang(text)
             }
         }
 
