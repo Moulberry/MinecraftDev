@@ -20,6 +20,7 @@
 
 package com.demonwav.mcdev.translations.intentions
 
+import com.demonwav.mcdev.MinecraftSettings
 import com.demonwav.mcdev.translations.TranslationFiles
 import com.demonwav.mcdev.util.runWriteAction
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction
@@ -42,6 +43,9 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
     override fun invoke(project: Project, editor: Editor, element: PsiElement) {
         if (element.parent is PsiLiteral) {
             val value = (element.parent as PsiLiteral).value as? String ?: return
+
+            val existingKey = TranslationFiles.findTranslationKeyForText(element, value)
+
             val result = Messages.showInputDialogWithCheckBox(
                 "Enter translation key:",
                 "Convert String Literal to Translation",
@@ -49,7 +53,7 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
                 true,
                 true,
                 Messages.getQuestionIcon(),
-                null,
+                existingKey,
                 object : InputValidatorEx {
                     override fun getErrorText(inputString: String): String? {
                         if (inputString.isEmpty()) {
@@ -73,12 +77,14 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
             val key = result.first ?: return
             val replaceLiteral = result.second
             try {
-                TranslationFiles.add(element, key, value)
+                if (existingKey == null || existingKey != key) {
+                    TranslationFiles.add(element, key, value)
+                }
                 if (replaceLiteral) {
                     val psi = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return
                     psi.runWriteAction {
                         val expression = JavaPsiFacade.getElementFactory(project).createExpressionFromText(
-                            "net.minecraft.client.resources.I18n.format(\"$key\")",
+                            MinecraftSettings.instance.convertToTranslationTemplate.replace("\$key", key),
                             element.context,
                         )
                         if (psi.language === JavaLanguage.INSTANCE) {
