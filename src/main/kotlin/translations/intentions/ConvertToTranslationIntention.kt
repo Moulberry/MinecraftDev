@@ -84,7 +84,11 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
                     val psi = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return
                     psi.runWriteAction {
                         val expression = JavaPsiFacade.getElementFactory(project).createExpressionFromText(
-                            MinecraftSettings.instance.convertToTranslationTemplate.replace("\$key", key),
+                            if (MinecraftSettings.instance.isUseCustomConvertToTranslationTemplate) {
+                                MinecraftSettings.instance.convertToTranslationTemplate.replace("\$key", key)
+                            } else {
+                                "net.minecraft.client.resources.I18n.format(\"$key\")"
+                            },
                             element.context,
                         )
                         if (psi.language === JavaLanguage.INSTANCE) {

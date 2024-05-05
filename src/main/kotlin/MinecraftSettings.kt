@@ -39,6 +39,7 @@ class MinecraftSettings : PersistentStateComponent<MinecraftSettings.State> {
         var isShadowAnnotationsSameLine: Boolean = true,
 
         var isForceJsonTranslationFile: Boolean = false,
+        var isUseCustomConvertToTranslationTemplate: Boolean = false,
         var convertToTranslationTemplate: String = "net.minecraft.client.resources.I18n.format(\"\$key\")",
     )
 
@@ -93,6 +94,12 @@ class MinecraftSettings : PersistentStateComponent<MinecraftSettings.State> {
         get() = state.isForceJsonTranslationFile
         set(forceJsonTranslationFile) {
             state.isForceJsonTranslationFile = forceJsonTranslationFile
+        }
+
+    var isUseCustomConvertToTranslationTemplate: Boolean
+        get() = state.isUseCustomConvertToTranslationTemplate
+        set(useCustomConvertToTranslationTemplate) {
+            state.isUseCustomConvertToTranslationTemplate = useCustomConvertToTranslationTemplate
         }
 
     var convertToTranslationTemplate: String

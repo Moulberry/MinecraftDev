@@ -35,6 +35,8 @@ import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.dsl.builder.selected
+import com.intellij.ui.layout.ComponentPredicate
 import com.intellij.util.IconUtil
 import javax.swing.JComponent
 import org.jetbrains.annotations.Nls
@@ -97,8 +99,17 @@ class MinecraftConfigurable : Configurable {
                 checkBox(MCDevBundle("minecraft.settings.translation.force_json_translation_file"))
                     .bindSelected(settings::isForceJsonTranslationFile)
             }
-            row(MCDevBundle("minecraft.settings.translation.convert_to_translation_template")) {
+
+            lateinit var property: ComponentPredicate
+            row {
+                val checkBox = checkBox(MCDevBundle("minecraft.settings.translation.use_custom_convert_template"))
+                    .bindSelected(settings::isUseCustomConvertToTranslationTemplate)
+                property = checkBox.selected
+            }
+
+            row {
                 textField().bindText(settings::convertToTranslationTemplate)
+                    .enabledIf(property)
             }
         }
 
