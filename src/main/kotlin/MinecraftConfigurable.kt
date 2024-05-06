@@ -94,7 +94,7 @@ class MinecraftConfigurable : Configurable {
             }
         }
 
-        group(MCDevBundle("minecraft.setting.translation")) {
+        group(MCDevBundle("minecraft.settings.translation")) {
             row {
                 checkBox(MCDevBundle("minecraft.settings.translation.force_json_translation_file"))
                     .bindSelected(settings::isForceJsonTranslationFile)
