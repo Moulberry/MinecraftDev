@@ -100,16 +100,16 @@ class MinecraftConfigurable : Configurable {
                     .bindSelected(settings::isForceJsonTranslationFile)
             }
 
-            lateinit var property: ComponentPredicate
+            lateinit var allowConvertToTranslationTemplate: ComponentPredicate
             row {
                 val checkBox = checkBox(MCDevBundle("minecraft.settings.translation.use_custom_convert_template"))
                     .bindSelected(settings::isUseCustomConvertToTranslationTemplate)
-                property = checkBox.selected
+                allowConvertToTranslationTemplate = checkBox.selected
             }
 
             row {
                 textField().bindText(settings::convertToTranslationTemplate)
-                    .enabledIf(property)
+                    .enabledIf(allowConvertToTranslationTemplate)
             }
         }
 
