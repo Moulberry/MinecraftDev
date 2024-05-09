@@ -20,7 +20,7 @@
 
 package com.demonwav.mcdev.translations
 
-import com.demonwav.mcdev.MinecraftSettings
+import com.demonwav.mcdev.TranslationSettings
 import com.demonwav.mcdev.translations.index.TranslationIndex
 import com.demonwav.mcdev.translations.index.TranslationInverseIndex
 import com.demonwav.mcdev.translations.lang.LangFile
@@ -115,7 +115,7 @@ object TranslationFiles {
         val module = context.findModule()
             ?: throw IllegalArgumentException("Cannot add translation for element outside of module")
         var jsonVersion = true
-        if (!MinecraftSettings.instance.isForceJsonTranslationFile) {
+        if (!TranslationSettings.getInstance(context.project).isForceJsonTranslationFile) {
             val version =
                 context.mcVersion ?: throw IllegalArgumentException("Cannot determine MC version for element $context")
             jsonVersion = version > MC_1_12_2
@@ -146,7 +146,7 @@ object TranslationFiles {
         val module = context.findModule()
             ?: throw IllegalArgumentException("Cannot add translation for element outside of module")
         var jsonVersion = true
-        if (!MinecraftSettings.instance.isForceJsonTranslationFile) {
+        if (!TranslationSettings.getInstance(context.project).isForceJsonTranslationFile) {
             val version =
                 context.mcVersion ?: throw IllegalArgumentException("Cannot determine MC version for element $context")
             jsonVersion = version > MC_1_12_2
@@ -335,7 +335,7 @@ object TranslationFiles {
         val module = context.findModule()
             ?: throw IllegalArgumentException("Cannot add translation for element outside of module")
         var jsonVersion = true
-        if (!MinecraftSettings.instance.isForceJsonTranslationFile) {
+        if (!TranslationSettings.getInstance(context.project).isForceJsonTranslationFile) {
             val version =
                 context.mcVersion ?: throw IllegalArgumentException("Cannot determine MC version for element $context")
             jsonVersion = version > MC_1_12_2

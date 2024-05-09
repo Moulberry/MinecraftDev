@@ -37,10 +37,6 @@ class MinecraftSettings : PersistentStateComponent<MinecraftSettings.State> {
         var underlineType: UnderlineType = UnderlineType.DOTTED,
 
         var isShadowAnnotationsSameLine: Boolean = true,
-
-        var isForceJsonTranslationFile: Boolean = false,
-        var isUseCustomConvertToTranslationTemplate: Boolean = false,
-        var convertToTranslationTemplate: String = "net.minecraft.client.resources.I18n.format(\"\$key\")",
     )
 
     private var state = State()
@@ -88,24 +84,6 @@ class MinecraftSettings : PersistentStateComponent<MinecraftSettings.State> {
         get() = state.isShadowAnnotationsSameLine
         set(shadowAnnotationsSameLine) {
             state.isShadowAnnotationsSameLine = shadowAnnotationsSameLine
-        }
-
-    var isForceJsonTranslationFile: Boolean
-        get() = state.isForceJsonTranslationFile
-        set(forceJsonTranslationFile) {
-            state.isForceJsonTranslationFile = forceJsonTranslationFile
-        }
-
-    var isUseCustomConvertToTranslationTemplate: Boolean
-        get() = state.isUseCustomConvertToTranslationTemplate
-        set(useCustomConvertToTranslationTemplate) {
-            state.isUseCustomConvertToTranslationTemplate = useCustomConvertToTranslationTemplate
-        }
-
-    var convertToTranslationTemplate: String
-        get() = state.convertToTranslationTemplate
-        set(convertToTranslationTemplate) {
-            state.convertToTranslationTemplate = convertToTranslationTemplate
         }
 
     enum class UnderlineType(private val regular: String, val effectType: EffectType) {

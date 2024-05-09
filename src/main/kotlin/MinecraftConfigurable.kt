@@ -33,10 +33,7 @@ import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.BottomGap
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
-import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
-import com.intellij.ui.dsl.builder.selected
-import com.intellij.ui.layout.ComponentPredicate
 import com.intellij.util.IconUtil
 import javax.swing.JComponent
 import org.jetbrains.annotations.Nls
@@ -91,25 +88,6 @@ class MinecraftConfigurable : Configurable {
             row {
                 checkBox(MCDevBundle("minecraft.settings.mixin.shadow_annotation_same_line"))
                     .bindSelected(settings::isShadowAnnotationsSameLine)
-            }
-        }
-
-        group(MCDevBundle("minecraft.settings.translation")) {
-            row {
-                checkBox(MCDevBundle("minecraft.settings.translation.force_json_translation_file"))
-                    .bindSelected(settings::isForceJsonTranslationFile)
-            }
-
-            lateinit var allowConvertToTranslationTemplate: ComponentPredicate
-            row {
-                val checkBox = checkBox(MCDevBundle("minecraft.settings.translation.use_custom_convert_template"))
-                    .bindSelected(settings::isUseCustomConvertToTranslationTemplate)
-                allowConvertToTranslationTemplate = checkBox.selected
-            }
-
-            row {
-                textField().bindText(settings::convertToTranslationTemplate)
-                    .enabledIf(allowConvertToTranslationTemplate)
             }
         }
 

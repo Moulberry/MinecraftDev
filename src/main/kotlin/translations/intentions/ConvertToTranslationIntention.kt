@@ -20,7 +20,7 @@
 
 package com.demonwav.mcdev.translations.intentions
 
-import com.demonwav.mcdev.MinecraftSettings
+import com.demonwav.mcdev.TranslationSettings
 import com.demonwav.mcdev.translations.TranslationFiles
 import com.demonwav.mcdev.util.runWriteAction
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction
@@ -81,11 +81,12 @@ class ConvertToTranslationIntention : PsiElementBaseIntentionAction() {
                     TranslationFiles.add(element, key, value)
                 }
                 if (replaceLiteral) {
+                    val translationSettings = TranslationSettings.getInstance(project)
                     val psi = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return
                     psi.runWriteAction {
                         val expression = JavaPsiFacade.getElementFactory(project).createExpressionFromText(
-                            if (MinecraftSettings.instance.isUseCustomConvertToTranslationTemplate) {
-                                MinecraftSettings.instance.convertToTranslationTemplate.replace("\$key", key)
+                            if (translationSettings.isUseCustomConvertToTranslationTemplate) {
+                                translationSettings.convertToTranslationTemplate.replace("\$key", key)
                             } else {
                                 "net.minecraft.client.resources.I18n.format(\"$key\")"
                             },
