@@ -122,7 +122,8 @@ object TranslationFiles {
         }
 
         if (!jsonVersion) {
-            return null // todo: lang file support
+            // This feature is only supported by JSON translations
+            return null
         }
 
         val files = FileTypeIndex.getFiles(
@@ -132,11 +133,7 @@ object TranslationFiles {
 
         for (file in files) {
             val psiFile = PsiManager.getInstance(context.project).findFile(file) ?: continue
-            if (jsonVersion) {
-                psiFile.findKeyForTextAsJson(text)?.let { return it }
-            } else {
-                // todo: this.findKeyForTextAsLang(text)
-            }
+            psiFile.findKeyForTextAsJson(text)?.let { return it }
         }
 
         return null
