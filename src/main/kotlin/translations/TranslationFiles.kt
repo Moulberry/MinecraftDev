@@ -122,12 +122,12 @@ object TranslationFiles {
         }
 
         if (!jsonVersion) {
-            // This feature is only supported by JSON translations
+            // This feature only supports JSON translation files
             return null
         }
 
         val files = FileTypeIndex.getFiles(
-            if (jsonVersion) JsonFileType.INSTANCE else LangFileType,
+            JsonFileType.INSTANCE,
             GlobalSearchScope.moduleScope(module),
         ).filter { getLocale(it) == TranslationConstants.DEFAULT_LOCALE }
 
