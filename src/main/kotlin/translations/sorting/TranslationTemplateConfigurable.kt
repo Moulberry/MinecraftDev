@@ -20,12 +20,11 @@
 
 package com.demonwav.mcdev.translations.sorting
 
+import com.demonwav.mcdev.TranslationSettings
 import com.demonwav.mcdev.asset.MCDevBundle
 import com.demonwav.mcdev.translations.lang.colors.LangSyntaxHighlighter
-import com.demonwav.mcdev.TranslationSettings
 import com.intellij.codeInsight.template.impl.TemplateEditorUtil
 import com.intellij.ide.DataManager
-import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.EditorColorsManager
@@ -33,15 +32,14 @@ import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.openapi.editor.ex.util.LexerEditorHighlighter
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.ui.DialogPanel
-import com.intellij.util.ui.JBUI
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.selected
 import com.intellij.ui.layout.ComponentPredicate
 import com.intellij.uiDesigner.core.GridConstraints
+import com.intellij.util.ui.JBUI
 import java.awt.BorderLayout
 import javax.swing.DefaultComboBoxModel
 import javax.swing.JComboBox
