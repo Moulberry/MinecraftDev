@@ -93,12 +93,6 @@ class TranslationTemplateConfigurable(private val project: Project) : Configurab
                 textField().bindText(translationSettings::convertToTranslationTemplate)
                     .enabledIf(allowConvertToTranslationTemplate)
             }
-
-            onApply {
-                for (project in ProjectManager.getInstance().openProjects) {
-                    ProjectView.getInstance(project).refresh()
-                }
-            }
         }
         innerPanel.add(dialogPanel, GridConstraints(), 0)
 
